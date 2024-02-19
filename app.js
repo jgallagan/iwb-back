@@ -1,25 +1,20 @@
+// Import required modules
 const express = require('express');
+
+// Create Express app
 const app = express();
-const router = express.Router();
- 
-router.get('/home', (req, res) => {
-  res.send('Hello World, This is home router');
-});
- 
-router.get('/profile', (req, res) => {
-  res.send('Hello World, This is profile router');
-});
- 
-router.get('/login', (req, res) => {
-  res.send('Hello World, This is login router');
-});
- 
-router.get('/logout', (req, res) => {
-  res.send('Hello World, This is logout router');
-});
- 
-app.use('/', router);
- 
-app.listen(process.env.PORT || 3000, () => {
-  console.log('Web Server is listening at port ' + (process.env.PORT || 3000));
+
+// Define routes (can be in a separate file)
+const brandsRoutes = require('./routes/brands');
+
+// Use defined routes
+app.use('/api', brandsRoutes);
+
+// Export the app object
+module.exports = app;
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
